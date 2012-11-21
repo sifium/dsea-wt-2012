@@ -27,7 +27,7 @@
 Dozent:\\Elmar Schömer\\[2em]
 Mitschrift von:\\André Groß\\[2em]
 Zuletzt Aktualisiert:\\\today\\
-\includegraphics[scale=.2]{uni_logo.png}\\[3em]
+\includegraphics[scale=.2]{figures/uni_logo.png}\\[3em]
 \Large \textbf{Zusammenfassung:}\\[1em]
 \parbox{0.75\textwidth}{\large
 Im Mittelpunkt der Veranstaltung stehen Methoden zur Entwicklung (vor allem \mbox{zeit-)} effizienter Algorithmen. Dabei betrachten wir insbesondere solche Datenstrukturen, die eine effiziente Verwaltung von dynamischen Datenmengen ermöglichen. Ein Teil der Algorithmen und Datenstrukturen wird in den Übungen implementiert.\\[.5em]
@@ -98,7 +98,7 @@ Dies kostet uns sehr viel Zeit. Das die Addition schneller geht zeigte uns der S
 
 Wir haben Zwei Zahlen $A$ und $C$ von welchen wir je die vordere und die Hintere hälfte nehmen. 
 \begin{figure}[H]
-\center\includegraphics[trim= 2cm 25cm 9.5cm 1.5cm,clip,width=\columnwidth]{DundC.pdf}
+\center\includegraphics[trim= 2cm 25cm 9.5cm 1.5cm,clip,width=\columnwidth]{figures/DundC.pdf}
 \caption{Divide and Conquer bei zwei Feldern}
 \end{figure}
 Damit ergeben sich folgende Rechenschritte
@@ -569,7 +569,7 @@ Mit Gaussformel:
 $$\sum_{j=a}^bj=\frac{b(b+1)}{2}- \frac{(a-1)a}{2}$$
 \section{Deterministischer Algorithmus für Selektionsproblem}
 Das Selektionsproblem sucht den Median von einem Feld indem es das Feld in Blöcke unterteilt
-\begin{figure}[H]\center\include{meridian}\caption{Selektionsproblem}\end{figure}
+\begin{figure}[H]\center\include{median}\caption{Selektionsproblem}\end{figure}
 $\frac{3n}{10}$ der Elemente sind$\le M$\\
 $$T(n)=cn+T\left(\frac{n}{5}\right)+T\left(\frac{7n}{10}\right)$$
 Akra Bazzi Theorem:
@@ -737,7 +737,7 @@ Graphik
 a-b-Bäume: Jeder Knoten Des Baumes hat mind a Kinder und Höchstens b Kinder.
 Blattorientierte Speicherung der zu verwaltenden Elemente
 \begin{figure}[H]
-\includegraphics[trim= 1.8cm 20cm 2cm 1.3cm,clip,width=\columnwidth]{aa25baum.pdf}
+\includegraphics[trim= 1.8cm 20cm 2cm 1.3cm,clip,width=\columnwidth]{figures/aa25baum.pdf}
 \caption{2-5-Baum}
 \end{figure}
 Zahl der Blätter n :
@@ -748,7 +748,7 @@ Zahl der Blätter n :
 Strategie zum Einfügen und Löschen von Elementen
 
 \begin{figure}[H]
-\includegraphics[trim= 1cm 20cm 1cm 1cm,clip,width=\columnwidth]{25bauminsert.pdf}
+\includegraphics[trim= 1cm 20cm 1cm 1cm,clip,width=\columnwidth]{figures/25bauminsert.pdf}
 \caption{Einfügen in 2-5-Baum}
 \end{figure}
 
@@ -760,13 +760,12 @@ Laufzeit für Suchen, Einfügen, Löschen $\in \theta(\log n)$
 \section{Amortisierte Analyse am Beispiel des Binärzählers}
 
 \begin{figure}[H]\center
-\includegraphics[trim= 1cm 18cm 15cm 1cm,clip,width=0.5\columnwidth]{zaehler.pdf}
+\includegraphics[trim= 1cm 18cm 15cm 1cm,clip,width=0.5\columnwidth]{figures/zaehler.pdf}
 \caption{Binärzähler}
 \end{figure}
 
-Worst case Kosten einer Inkrement-Operation $\mathcal O(\log_2n)$.
-
-Gesamtkosten für eine Folge von n Inkrement-Operationen (beginnend beim Zählerstand 0)
+Worst case Kosten einer Inkrement- Operation $$\mathcal O(\log_2n)$$\\
+Gesamtkosten für eine Folge von n Inkrement- Operationen (beginnend beim Zählerstand 0)
 \begin{align*}
 &\frac{n}{2}&\mbox{verursachen Kosten }&1&\mbox{Endung }&0\\
 &\frac{n}{4}&\mbox{verursachen Kosten }&2&\mbox{Endung }&01\\
@@ -807,12 +806,12 @@ $2RE$ pro Einfüge- bzw.Löschoperation\\
 $a_i=2$\\
 \textbf{Einfügen:}
 \begin{figure}[H]\center
-\includegraphics[trim= 6cm 24cm 6cm 1cm,clip,width=\columnwidth]{zaehler.pdf}
+\includegraphics[trim= 6cm 24cm 6cm 1cm,clip,width=\columnwidth]{figures/zaehler.pdf}
 \caption{Kosten 2-5-Baum einfügen}
 \end{figure}
 \textbf{Löschen:}
 \begin{figure}[H]\center
-\includegraphics[trim=  6cm 18.5cm 6cm 7cm,clip,width=\columnwidth]{zaehler.pdf}
+\includegraphics[trim=  6cm 18.5cm 6cm 7cm,clip,width=\columnwidth]{figures/zaehler.pdf}
 \caption{Kosten 2-5-Baum Löschen}
 \end{figure}
 
