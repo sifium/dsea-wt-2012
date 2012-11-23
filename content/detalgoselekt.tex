@@ -1,0 +1,17 @@
+Das Selektionsproblem sucht den Median von einem Feld indem es das Feld in Blöcke unterteilt
+\begin{figure}[H]\center\input{figures/median}\caption{Selektionsproblem}\end{figure}
+$\frac{3n}{10}$ der Elemente sind$\le M$\\
+$$T(n)=cn+T\left(\frac{n}{5}\right)+T\left(\frac{7n}{10}\right)$$
+Akra Bazzi Theorem:
+\begin{align*}
+T(n)&=\sum_{i=1}^ka_iT\left(\frac{n}{b_i}+g(n)\right)\\
+\Rightarrow T(n)&= \mathcal O\left( n^p\left(1+\int_1^n\frac{g(u)}{u^{p+1}}du\right)\right)\\
+T(n)&=\mathcal O\left(n^p\left(1+\int_1^n\frac{cu}{u^{p+1}}du\right)\right)\\
+&=\mathcal O\left(n^p\left(1+\frac{c}{1-p}n^{-p+1}\right)\right)\\
+&=\mathcal O(n^p+n^1)=\mathcal O(n)
+\end{align*}
+\fbox{\parbox{\columnwidth}{Nebenrechnung:\small\begin{align*}&\sum_{i=1}^k\frac{a_i}{b_i^p}=1\\
+&g(n)=cn\\
+&a_1=a_2=1;\,b_1=5;\, b_2=\frac{10}{7}\\
+&\left( \frac{1}{5} \right)^p+ \left( \frac{7}{10} \right)^p=1\\
+&p\approx 0,84 \le 1\end{align*}}}\\[.5em]

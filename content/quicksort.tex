@@ -1,0 +1,75 @@
+Als Beispiel für einen randomisierten D\&C Algorithmus soll hier Quicksort dienen.
+
+Quicksort ist ein Replace Verfahren, welches den Vorteil hat, \,dass man keinen \,zusätzlichen Speicher zum Sortieren benötigt.
+
+Das Verfahren von Quicksort lässt sich gut an einem Beispiel erklären.
+Wir nehmen hierzu ein Feld von Zahlen.
+Man versucht beim partionieren mehr Intelligenz in die Sache zu stecken.
+Wir suchen uns dazu ein beliebiges Element (Pivot- Element -$P$-) heraus und bilden zwei Mengen von Elementen, eine Menge $X\le P$ und eine Menge $Y\ge P$. Wir bewegen nun das Pivot-Element ans Ende (tauschen) und durchlaufen das Feld mit dem Index $i$ und schreiben die Zahlen kleiner $P$ an den Anfang und die Zahlen Größer $P$ an das Ende.
+dann Tauschen wir das Pivot-Element wieder zurück und haben nun zwei Mengen größer, kleiner $P$ im Feld.
+\begin{figure}[H]
+\begin{verbatim}
+partition(int a[],int l,int r){
+   int x=a[r];
+   int i=l-1;
+   for(int j=l;j<r;j++){
+      if(a[j]<=x){
+         i=i+1;
+         swap(a,i,j);
+      }
+   }
+   swap(a,i+1,r);
+   return i+1;
+}
+quicksort(int a[], int l, int r){
+   if(l>=r) return;
+   int p=partition(a,l,r);
+   quicksort(a,l,p-1);
+   quicksort(a,p+1,r);
+}
+\end{verbatim}
+\caption{Quicksort}
+\end{figure}
+\subsection{Laufzeitanalyse}
+\textbf{Worst-case}\\
+Pivotelement $X$ ist immer das kleinste / größte Element in der betrachteten Teilfolge.
+\begin{align*}
+T(1)&=0\\
+T(n)&=T(n-1)+cn\\
+&=T(n-2)+c(n-1+n)\\
+&=T(n-3)+c(n-2+n-1+n)\\
+&\vdots\\
+&=c\sum_{i=1}^n=c\frac{n(n+1)}{2}\in \theta(n^2)\\
+\end{align*}
+Erinnerung:\\
+$$\mathcal X =\mbox{Zufallsvariable}$$
+$$E(\mathcal X)=\sum pr(\mathcal X= x_i)x_i$$
+z.B. Erwartete Augenzahl bei fairem Würfel
+$$E(\mathcal X)=\sum_{i=1}^6\frac{1}{6}i=\frac{1}{6}\frac{67}{2}=3.5$$
+z.B. Wieviele Münzwürfe benötigt man bis zum ersten Mal "Kopf" erscheint?
+\begin{align*}
+E(\mathcal X)&=\sum_{i=1}^\infty \left(\frac{1}{2}\right)^ii\\
+E(\mathcal X)&=\frac{1}{2}\sum_{i=1}^\infty\left(\frac{1}{2}\right)^ii=\frac{1}{2}\frac{1}{(1-\frac{1}{2})^2}=\frac{1}{2}\frac{1}{\frac{1}{4}}\\&=2
+\end{align*}
+\fbox{\parbox{\columnwidth}{\textbf{Nebenrechnung:}\small\begin{align*}\sum_{i=1}^\infty ip^{i-1}&=\frac{d}{dp}\sum_{i=0}^\infty p^i\\
+&=\frac{d}{dp}\frac{1}{1-p}=\frac{1}{(1-p)^2}\\&|p|<1\end{align*}}}\\[.5em]
+Weiter mit QS:\\
+\begin{align*}
+T(n) &= \mbox{Erwartungswert}\\
+T(n)&=\sum_{i=1}^n\frac{1}{n}\left(T(i-1)+T(n-i)\right)+cn\\
+&\in \theta((n+1)ln(n+1)=\theta(n\log n)\\
+nT(n)&=\sum_{i=1}^nT(i-1)+\sum_{i=1}^nT(n-i) +cn^2\\
+&=2\sum_{i=0}^{n-1}T(i)+cn^2\\
+&(n-1)T(n-1)\\
+&=2\sum_{i=0}^{n-2}T(i)+c(n-1)^2\end{align*}
+\tiny\[nT(n)-(n-1)T(n-1)=2T(n-1)+c(n^2-(n^2-2n+1))\]
+\small\begin{align*}
+nT(n)&=(n+1)T(n-1)+c'n\\
+T(n)&=\frac{n+1}{n}T(n-1)+c'\\
+&=\frac{n+1}{n}\left(\frac{n}{n-1}T(n-2)+c'\right)+c'\\
+&=\frac{n+1}{n-1}T(n-2)+\frac{n+1}{n}c'+\frac{n+1}{n+1}c'\\
+&=\frac{n+1}{n-k}T(n-k-1)+c'(n+1)\sum_{i=n-k+1}^{n+1}\frac{1}{i}\\
+&6k:=n-1\\
+&=(n+1)T(0)+c'(n+1)\sum_{i=1}^{n+1}\frac{1}{i}
+\end{align*}
+\normalsize

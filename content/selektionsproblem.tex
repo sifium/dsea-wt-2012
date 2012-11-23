@@ -1,0 +1,32 @@
+Gegeben: Eine Folge von $n$ Elementen (unsortiert)
+Gesucht: das $k-t$ kleinste Element
+\begin{figure}[H]
+\begin{verbatim}
+int select(int a[],int l,int r, int k){
+   int p= partition(a,l,r);
+   if(l+k<p) 
+      return select(a,l,p-1,k);
+   if(l+k>p) 
+      return select(a,p+1,r,k+l-p-1);
+   return a[p];
+}
+\end{verbatim}
+\caption{Selection Sort}
+\end{figure}
+Wir erhalten damit die Rekursionsgleichung
+\[T(n)=cn^1+T(\frac{n}{2})\]
+Womit wir die Werte$a=1;\, b=2;\,\alpha=1;$ für die Lösung mit dem Mastertheorem erhalten.
+
+\begin{align*}
+\Rightarrow& T(n)\in \mathcal O(n)\\
+T(n)&=\mbox{Erwartungswert der Laufzeit von select}\\
+T(n)&\le cn+\sum_{i=1}^n\frac{1}{n}\max\left(T(i-1),T(n-i)\right)\\
+&\le cn+\frac{a}{n}\sum_{1=1}^n\max\left((i-1),(n-i)\right)\\
+&\le cn+2\frac{a}{n}\sum_{j=\frac{n}{2}}^{n-1}j\\
+&\le cn+2\frac{a}{n}\left(\frac{(n+1)n}{2}-\frac{(\frac{n}{2}-1)\frac{n}{2}}{2}\right)\\
+&\le cn+a\left(\frac{3}{4}n-\frac{1}{2}\right)\\
+&\le cn+\frac{3}{4}an
+\end{align*}
+hier fehlt noch was....\\
+Mit Gaussformel:
+$$\sum_{j=a}^bj=\frac{b(b+1)}{2}- \frac{(a-1)a}{2}$$

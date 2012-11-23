@@ -1,0 +1,12 @@
+$$f,g:\mathbb N \rightarrow\mathbb N$$
+$$f(n)\in \mathcal O(g(n)):\Leftrightarrow\exists c>0\exists n_0\forall n>n_0:f(n)\leq cg(n)$$
+$$\Leftrightarrow \limsup_{n\rightarrow\infty}\frac{f(n)}{g(n)}<\infty$$
+\textbf{In Worten} " f wächst nicht schneller als g"\\
+z.B. $$f(n)=4n^3+6n^2-7n+9\in\mathcal O(n^3)$$
+$$\in \Omega(n^3)$$
+$$\lim_{n\rightarrow \infty}\frac{f(n)}{g(n)}=\frac{4n^3+6n^2-7n+9}{n^3}=4<\infty$$
+$$>0$$
+$$f(n)\in\Omega(g(n)):\Leftrightarrow\exists c>0 \exists n_0 \forall n>n_0:f(n)\ge cg(n)$$
+$$\Leftrightarrow \liminf_{n\rightarrow\infty}\frac{f(n)}{g(n)}>0$$
+Bsp:
+$$\mbox{Martin}$$

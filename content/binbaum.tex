@@ -1,0 +1,24 @@
+Wir haben die Zufallsvariablen $\mathcal X_1,\mathcal X_2 $ für die Augenzahl zweier fairer Würfel mit 
+\[E(\mathcal X_1)=E(\mathcal X_2)=3,5 \]
+\[E(\max(\mathcal X_1,\mathcal X_2))\approx4,47 \]
+\[=\sum pr(Z=z) z = \frac{1}{36}1+\frac{3}{36}2+\frac{5}{36}3+\hdots \]
+\textbf{Frage:}\\
+Was ist die erwartete maximale Tiefe eines naturwüchsigen binären Baumes?
+
+$t_n$ zugehörige Zufallsvariable
+\[E(T_n)=\sum_{i=1}^n \frac{1}{n}E(\max(t_{i-1},T_{n-i})+1\]
+\fbox{\parbox{\columnwidth}{ Nebenrechnung:\small
+\begin{align*}
+\max(\mathcal X,\mathcal Y)&\le\log_2(2^x+2^y)\\
+E(\max(2^\mathcal X,2^\mathcal Y))&\le E(2^\mathcal X+2^\mathcal Y)=E(2^\mathcal X)+E(2^\mathcal Y )\\
+&\mbox{z.B.}\mathcal X=10,\,\mathcal Y=5\\
+&\log_2(2^{10}+2^{5})
+\end{align*}}}\\[.5em]
+neue Zufallsvariable
+\[\mathcal X_n=2^{T_n} \,\mbox{expotentielle Tiefe}\]
+\begin{align*}
+E(\mathcal X_n)&=2\sum_{i=1}^n\frac{1}{n}E(\max(\mathcal X_{i-1},\mathcal X_{n-i}))\\
+&\le 2\sum_{i=1}^n\frac{1}{n}(E(\mathcal X_{i-1})+E(\mathcal X_n-i))\\
+&=\frac{4}{n}\sum_{j=0}^{n-1}E(\mathcal X_j)
+\end{align*}
+\fbox{\parbox{\columnwidth}{\textbf{Merke:}\[E(\mathcal X_n)=\frac{4}{n}\sum_{i=0}^{n-1}E(\mathcal X_j)\]}}\\[.5em]

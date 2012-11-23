@@ -1,0 +1,104 @@
+Wir wollen nun einen Ansatz liefern um im allgemeinen Rekursionsgleichungen lösen.
+Dazu betrachten wir uns Probleme der Größe $\frac{n}{b}$, welche man als Teilprobleme eines Problems $T(n)$ auffassen kann.
+Die Laufzeit solcher Probleme ist $T\left(\frac{n}{b}\right)$.
+Mit der Anzahl an Teilproblemen und der Betrachtung der konstanten Anteile erhalten wir allgemein für Rekursionsgleichungen die Form
+\begin{align*}
+T(n)&=aT\left(\frac{n}{b}\right)+cn^\alpha\\
+T(1)&=c
+\end{align*}
+für $T\left(\frac{n}{b}\right)$ folgt
+\begin{align*}
+T\left(\frac{n}{b}\right)&=aT\left(\frac{n}{b^2}\right)+c\left(\frac{n}{b}\right)^\alpha\\
+T\left(\frac{n}{b^2}\right)&=aT\left(\frac{n}{b^3}\right)+c\left(\frac{n}{b^2}\right)^\alpha
+\end{align*}
+damit ergibt sich für $T(n)$
+\begin{align*}
+T(n)&=a(aT\left(\frac{n}{b^2}\right)+c\left(\frac{n}{b}\right)^\alpha)+cn^\alpha\\
+&=a^2T\left(\frac{n}{b^2}\right)+ac\left(\frac{n}{b}\right)^\alpha+cn^\alpha\\
+&\vdots&\\
+&=a^kT\left(\frac{n}{b^k}\right)+cn^\alpha\sum_{i=0}^{k-1}\left(\frac{a}{b^\alpha}\right)^i
+\end{align*}
+Die Rekursion bricht ab, wenn
+$$\frac{n}{b^k}=1\Rightarrow k=\log_bn$$
+$$n=b^k$$
+Um die Lösung zu ermitteln müssen wir uns die möglichen Lösungen Betrachten.\\[.5em]
+\fbox{\parbox{.95\columnwidth}{
+Exkurs Geometrische Reihe:
+\begin{align*}
+\sum_{i=0}^{\infty}x^i&=\frac{1}{1-x}\, , \, \mbox{für} |x|<1\\
+\sum_{i=0}^{k-1}x^i&=\frac{x^k-1}{x-1}\, , \, \mbox{für} x\neq1
+\end{align*}
+}}\\[.5em]
+{\fbox{\parbox{.95\columnwidth}{Umschreiben der Potenzen:
+\begin{align*}
+a&=b^{\log_ba}\\
+a^{\log_bn}&=\left(b^{\log_ba}\right)^{\log_bn}\\
+&=b^{\log_ba\log_bn}\\
+&=\left( b^{\log_bn}\right)^{\log_ba}\\
+&=n^{\log_ba}
+\end{align*}
+}}\\[.5em]
+\begin{itemize}
+\item[\textbf{1. Fall}]$\frac{a}{b^\alpha}<1\Leftrightarrow a<b^\alpha \Leftrightarrow \alpha < \log_ba$
+\begin{align*}
+T(n)&=a^{\log_bn}T(1)+cn^\alpha\frac{1}{1-\left(\frac{a}{b^\alpha}\right)}\\
+&= n^{\log_ba}c+c'n^\alpha\\
+&\le c''n^\alpha \,,\,\, \mbox{für hinreichend große n}
+\end{align*}
+\item[\textbf{2. Fall}]$\frac{a}{b^\alpha}>1$
+\begin{align*}
+T(n)&=cn^{\log_ba}T(1)+cn^\alpha\frac{\left(\frac{a}{b^\alpha}\right)^{\log_bn}-1}{\frac{a}{b^\alpha}-1}\\
+&=cn^{\log_ba}+c'n^\alpha\frac{n^{log_ba}}{n^\alpha}\\
+&\le  c''n^{\log_ba}
+\end{align*}
+Karazuba:
+\begin{align*}&&a=3,b=2,\alpha=1\\&&\Rightarrow T_K(n)=cn^{\log_23}\end{align*}
+Strassen:
+\begin{align*}&&a=7,b=2,\alpha=2\\&&\Rightarrow T_S(n)=cn^{\log_27}\end{align*}
+\item[\textbf{3. Fall}]$\frac{a}{b^\alpha}=1 \Rightarrow \alpha = \log_ba$
+\begin{align*}
+T(n)&=cn^{\log_ba}+cn^\alpha\log_bn\\
+T(n)&\le n''n^{\log_ba}\log_bn
+\end{align*}
+\begin{align*}
+&&a=2,b=2,\alpha=1\\
+&&\Rightarrow T(n)=cn\log n
+\end{align*}
+\end{itemize}
+Mergesort
+\begin{align*}
+T(n)&=\left\{\begin{array}{ll}
+c&\mbox{für }\,n=1\\
+2T(\frac{n}{2})+cn&\mbox{für }\,n\neq1
+\end{array}\right.\\
+\mbox{mit}\\
+T(n)&=aT(\frac{n}{b}+cn^\alpha)\\
+&\Rightarrow a=1,b=2,\alpha=1\\
+&\Rightarrow \mbox{3. Fall}\\
+&\log_ba=\alpha\\
+T(n)&=c'n\log_2n
+\end{align*}
+z.B. binäre Suche
+\begin{align*}
+T(n)&=\left\{\begin{array}{ll}
+c&\mbox{für }\,n=1\\
+T(\frac{n}{2})+c&\mbox{für }\,n\neq1
+\end{array}\right.\\
+&\Rightarrow a=1,b=2,\alpha=0\\
+&\Rightarrow\mbox{3. Fall}\\
+& \log_21=0\\
+T(n)&=c'\log_2n
+\end{align*}
+\subsection{Erweiterung des Theorems}
+$$f(n)=\left\{\begin{array}{ll}c&\mbox{für }\,n=1\\af(\frac{n}{b})+cn^\alpha&\mbox{sonst}\end{array}\right.$$
+\begin{itemize}
+\item[1. Fall]$\alpha<\log_ba\Rightarrow f(n)\in\mathcal O(n^{\log_ba})$
+\item[2. Fall]$\alpha>\log_ba\Rightarrow f(n)\in\mathcal O(n^{\alpha})$
+\item[3. Fall]$\alpha=\log_ba\Rightarrow f(n)\in\mathcal O(n^\alpha\log_2n)$
+\end{itemize}
+\fbox{\parbox{\columnwidth}{Umschreiben der Potenzen:\small
+\begin{align*}
+\log_bn\in\mathcal O (\log_en)\\
+\log_bn=\frac{\log_en}{\log_eb}
+\end{align*}
+}}
