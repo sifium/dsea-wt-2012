@@ -167,6 +167,157 @@ $a_i=2$\\
 Die m Einfüge- und Löschoperationen auf einem anfangs leeren Baum haben amotisierte Kosten=2.
 $\Rightarrow$ Rekonstruierungskosten insgesamt belaufen sich auf $2m$
 
+\section{VL 26.11.}
+\subsection{Skiplisten}
+\begin{figure}[H]
+\begin{verbatim}
+class ListNode{
+   int kex;
+   ListNode next,down;
+
+   boolean search(int x){
+      ListNode node = head;
+      do{
+          while(x>node.next.key)
+            node=node.next;
+         if (x == node.next.key)
+            return true;
+         node = node.down; 
+      }while(node!=null)
+      return false;
+      }
+}
+\end{verbatim}
+\caption{Skiplisten Pseudocode}
+\end{figure}
+
+\begin{figure}[H]\center
+\includegraphics[trim= .9cm 22cm .9cm 1cm,clip,width=\columnwidth]{figures/skiplist.pdf}
+\caption{Skipliste, ein Beispiel}
+\end{figure}
+
+\begin{figure}[H]\center
+\includegraphics[trim= .9cm 14cm .9cm 8cm,clip,width=\columnwidth]{figures/skiplist.pdf}
+\caption{In Skipliste einfügen}
+\end{figure}
+
+Erwartete Tiefe:\\
+mit Wahrscheinlichkeit $p$ soll ein Element von Level $i$ auf Level $i+1$ angehoben werden\\
+Erwartete Zahl von Elementen auf Level $i$: \, $p^in$
+\[p^in<1 \Rightarrow n < \left(\frac{1}{p}\right)^i \Rightarrow i>\log_\frac{1}{p}n\]
+
+Suchzeit:\\
+Wir müssen die Ebenen von oben nach unten durchlaufen.\\
+Die Frage ist, wie viele Elemente bei der verfeinerten Liste hinzukommen.\\
+\begin{figure}[H]\center
+\includegraphics[trim= .9cm 9cm 8.9cm 18cm,clip,width=\columnwidth]{figures/skiplist.pdf}
+\caption{In Skipliste einfügen}
+\end{figure}
+\begin{align*}\mathcal X = &\mbox{Zahl der Elemente auf Level i zwischen zwei}\\&\mbox{benachbarten Elementen auf Level i+1}\end{align*}
+\[E(\mathcal X)=\sum_{j=1}^\infty j(1-p)^{j-1}p=p\frac{1}{(1-(1-p))^2}=\frac{1}{p}\]
+Erwartete Suchzeit:
+\[T_P(n)=\frac{1}{p}\log_\frac{1}{P}n=\mathcal O (\log n)\]
+plot $\frac{x}{ln x}$ mit hervorheben des Sattelpunktes
+\begin{align*}
+f(x)&=x\log_xn\\
+&=\frac{x\ln n}{\ln x}\\
+f'(x)&=\ln n \frac{1\ln x -x\frac{1}{x}}{(\ln x)^2}=0\\
+&\Rightarrow \ln x = 1\\
+&\Rightarrow x=e \\
+&\Rightarrow p=\frac{1}{e}
+\end{align*}
+
+\subsection{Dynamisches Programmieren}
+es ist eine Technik um sich optimale Lösungen für Teilprobleme zu suchen.\\
+\textbf{Beispiel:}\\
+Sie sollen eine reihe von Matrizen multiplizieren. Die Dimensionen der Matrizen können durchaus unterschiedlich sein, was ist nun eine geschickte Reihenfolge um möglichst wenig Operationen zu benötigen?\\
+geg: $n$-Matrizen $A_i$ für $i=1,\hdots,n$ , $A_i\in\mathbb R^{d_i\times d_{i+1}}$\\
+ges: Optimale Auswerte-Reihenfolge für das Produkt $A_1 \dot A_2 \dot A_3 \dot \hdots \dot A_n$\\
+Beispiel: $n=3$\\
+\begin{align*}
+(A_1 A_2) A_3 = 2 10 5 + 2 5 8 =180
+A_1 (A_2 A_3) = 10 5 8 + 2 10 8= 560
+\end{align*}
+
+\[cost(A_i A_{i+1})=\theta(d_i d_{i+1} d_{i+2})\]
+Bild 2\\
+\[(A_1\hdots A_k)(A_{k+1}\hdots A_n)\]
+\textbf{Idee:} Suche nach optimaler Teillösung und Konstruiere daraus die optimale Gesamtlösung.\\
+\[cos(A_i a_{i+1} \hdots A_j)=c_{ij}\]
+\[c_{ij}=\min_{i<k<j}c_{ik}+c_{k+1,j}+d_{i}d_{k+i}d_{j+1}\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
