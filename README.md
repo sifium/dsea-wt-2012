@@ -1,6 +1,8 @@
 dsea-wt-2012
 ============
 
+GitHub: https://github.com/sifium/dsea-wt-2012
+
 Vorlesungsskript: Datenstrukturen und effiziente Algorithmen Universität Mainz
 
 Ich habe in den letzten Vorlesungen immer mit geText. Hiermit möchte ich nun alle aufrufen mit 
