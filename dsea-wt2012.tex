@@ -48,12 +48,45 @@ http://cg.informatik.uni-mainzde/dsea\\
 \include{skriptum}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{Die letzte(n) Vorlesung(en)}
+\chapter{VL 12.11.}
+\section{AVL-Bäume}
+Dies sind Bbinäre Suchbäume, welche sich selbst balancieren.
+\begin{figure}[H]\center
+\includegraphics[trim= 1cm 25cm 13cm 1cm,clip,width=.7\columnwidth]{figures/avlbase.pdf}
+\caption{AVL-Baum}
+\end{figure}
+\begin{figure}[H]\center
+\includegraphics[trim= 1cm 22cm 10cm 6cm,clip,width=\columnwidth]{figures/avlbase.pdf}
+\caption{AVL-Bäume mit Tiefe $t=2$}
+\end{figure}
+\begin{figure}[H]\center
+\includegraphics[trim= 1cm 14.1cm 3cm 8cm,clip,width=\columnwidth]{figures/avlbase.pdf}
+\caption{AVL-Bäume mit Tiefe $t=3$}
+\end{figure}
+\begin{figure}[H]\center
+\includegraphics[trim= 1cm 11cm 16cm 15.5cm,clip,width=.6\columnwidth]{figures/avlbase.pdf}
+\caption{Ein AVL-Baum mit Tiefe $t=3$ sieht niemals so aus, da er balanciert ist.}
+\end{figure}
+\begin{figure}[H]\center
+\includegraphics[trim= 1cm 22cm 9cm 1cm,clip,width=.7\columnwidth]{figures/avlins.pdf}
+\caption{Ein AVL-Baum}
+\end{figure}
+\begin{figure}[H]\center
+\includegraphics[trim= 1cm 16cm 11cm 8cm,clip,width=.7\columnwidth]{figures/avlins.pdf}
+\caption{Einfügen in A}
+\end{figure}
+\begin{figure}[H]\center
+\includegraphics[trim= 1cm 10cm 4cm 14cm,clip,width=\columnwidth]{figures/avlins.pdf}
+\caption{Einfügen in C}
+\end{figure}
+\chapter{VL 14.11.}
+
+\chapter{VL 19.11.}
 \section{AVL \, Bäume \, Wiederholung}
 
 Die Logaritmische Tiefe ist wichtig für die Suchzeit usw.\\
 Linker und Rechter Teilbaum dürfen sich für Suche usw. in ihrer Tiefe nur um max. Eins unterscheiden.
 
-\chapter{VL 19.11.2012}
 \begin{align*}
 f(z) &=(z+c)^p \\
 &=\sum_{n=0}^\infty \frac{1}{n!}f^{(n)}(z0)(z-z_0)\\
@@ -78,14 +111,14 @@ hier fehlt auch noch ne Menge...
 \[b_n=-\frac{1}{2}\begin{array}{c} \frac{1}{2} \\n+1\end{array}(-4)^{n+1}\]
 den rest kann ich nicht lesen....
 
-\section{Bijektion \, zwischen \, Binärbäumen}
+\section{Bijektion zwischen Binär\-bäumen}
 \[n=3; c_c=\frac{1}{n+1}\begin{array}{c} 2n\\n\end{array}\Rightarrow c_3=5\]
 Graphik
 
 \section{Amortisierte Analyse am Beispiel von 2-5-Bäumen}
 a-b-Bäume: Jeder Knoten Des Baumes hat mind a Kinder und Höchstens b Kinder.
 Blattorientierte Speicherung der zu verwaltenden Elemente
-\begin{figure}[H]
+\begin{figure}[H]\center
 \includegraphics[trim= 1.8cm 20cm 2cm 1.3cm,clip,width=\columnwidth]{figures/aa25baum.pdf}
 \caption{2-5-Baum}
 \end{figure}
@@ -109,7 +142,7 @@ Laufzeit für Suchen, Einfügen, Löschen $\in \theta(\log n)$
 \section{Amortisierte Analyse am Beispiel des Binärzählers}
 
 \begin{figure}[H]\center
-\includegraphics[trim= 1cm 18cm 15cm 1cm,clip,width=0.5\columnwidth]{figures/zaehler.pdf}
+\includegraphics[trim= 1cm 18cm 15cm 1cm,clip,width=0.4\columnwidth]{figures/zaehler.pdf}
 \caption{Binärzähler}
 \end{figure}
 
@@ -155,19 +188,19 @@ $2RE$ pro Einfüge- bzw.Löschoperation\\
 $a_i=2$\\
 \textbf{Einfügen:}
 \begin{figure}[H]\center
-\includegraphics[trim= 6cm 24cm 6cm 1cm,clip,width=\columnwidth]{figures/zaehler.pdf}
+\includegraphics[trim= 6cm 24cm 6cm 1cm,clip,width=.9\columnwidth]{figures/zaehler.pdf}
 \caption{Kosten 2-5-Baum einfügen}
 \end{figure}
 \textbf{Löschen:}
 \begin{figure}[H]\center
-\includegraphics[trim=  6cm 18.5cm 6cm 7cm,clip,width=\columnwidth]{figures/zaehler.pdf}
+\includegraphics[trim=  6cm 18.5cm 6cm 7cm,clip,width=.8\columnwidth]{figures/zaehler.pdf}
 \caption{Kosten 2-5-Baum Löschen}
 \end{figure}
 
 Die m Einfüge- und Löschoperationen auf einem anfangs leeren Baum haben amotisierte Kosten=2.
 $\Rightarrow$ Rekonstruierungskosten insgesamt belaufen sich auf $2m$
 
-\section{VL 26.11.}
+\chapter{VL 26.11.}
 \subsection{Skiplisten}
 \begin{figure}[H]
 \begin{verbatim}
@@ -210,7 +243,7 @@ Suchzeit:\\
 Wir müssen die Ebenen von oben nach unten durchlaufen.\\
 Die Frage ist, wie viele Elemente bei der verfeinerten Liste hinzukommen.\\
 \begin{figure}[H]\center
-\includegraphics[trim= .9cm 9cm 8.9cm 18cm,clip,width=\columnwidth]{figures/skiplist.pdf}
+\includegraphics[trim= .9cm 9cm 8.9cm 18cm,clip,width=.8\columnwidth]{figures/skiplist.pdf}
 \caption{In Skipliste einfügen}
 \end{figure}
 \begin{align*}\mathcal X = &\mbox{Zahl der Elemente auf Level i zwischen zwei}\\&\mbox{benachbarten Elementen auf Level i+1}\end{align*}
@@ -235,19 +268,40 @@ geg: $n$-Matrizen $A_i$ für $i=1,\hdots,n$ , $A_i\in\mathbb R^{d_i\times d_{i+1
 ges: Optimale Auswerte-Reihenfolge für das Produkt $A_1 \dot A_2 \dot A_3 \dot \hdots \dot A_n$\\
 Beispiel: $n=3$\\
 \begin{align*}
-(A_1 A_2) A_3 = 2 10 5 + 2 5 8 =180
-A_1 (A_2 A_3) = 10 5 8 + 2 10 8= 560
+(A_1 A_2) A_3 &= 2 10 5 + 2 5 8 &=180\\
+A_1 (A_2 A_3) &= 10 5 8 + 2 10 8&= 560
 \end{align*}
 
 \[cost(A_i A_{i+1})=\theta(d_i d_{i+1} d_{i+2})\]
 Bild 2\\
 \[(A_1\hdots A_k)(A_{k+1}\hdots A_n)\]
 \textbf{Idee:} Suche nach optimaler Teillösung und Konstruiere daraus die optimale Gesamtlösung.\\
-\[cos(A_i a_{i+1} \hdots A_j)=c_{ij}\]
+\[cos(A_i A_{i+1} \hdots A_j)=c_{ij}\]
 \[c_{ij}=\min_{i<k<j}c_{ik}+c_{k+1,j}+d_{i}d_{k+i}d_{j+1}\]
+\chapter{VL 28.11}
+Andere Schreibweise:
+\[c_{ij}=cost(A_i A_{i+1} \hdots A_j)\]
+\[c_{ij}=\min_{k=1,\hdots j-1}(c_{ik}+_{i+k,j-k}+d_id_{i+k}d_{i+j})\]
+\begin{figure}[H]\center
+\includegraphics[trim= 3cm 16cm 7cm 2cm,clip,width=.7\columnwidth]{figures/skyscraper.pdf}
+\caption{ka was das sein sollte :)}
+\end{figure}
 
-
-
+\subsection{Egg Dropping}
+\begin{align*}&n=15[\mbox{Stockwerke}]&\,&\,&k=2[\mbox{Eier}]&
+\end{align*}
+\begin{figure}[H]\center
+\includegraphics[trim= 2cm 1.5cm 7.5cm 16cm,clip,width=\columnwidth]{figures/skyscraper.pdf}
+\caption{Egg dropping von einem 15 stöckigen Hochhaus}
+\end{figure}
+Die Zahl der verbleibenden Versuche bei $n$ verbleibenden Stockwerken und $k$ verbleibenden Eier bezeichnen wir als $t_{n,k}$.
+Betrachten wir nun den Wurf eines der k Eier aus Stockwerk x und die beiden möglichen Ergebnisse.
+\[t_{n,k}=1+\min_{2\le x\le n}\max(t_{x-1,k-1},t_{n-x,k})\]
+\begin{description}
+\item[1. Fall: ] Ei zerbricht\[t_{x-1,k-1}\]
+\item[2. Fall: ] Ei überlebt\[t_{n-x,k}\]
+\end{description}
+\[t_{15,2}=1+\min(\max(t_{1,1},t_{13,2}),\max(t_{2,1},t_{12,2},\hdots)\]
 
 
 
