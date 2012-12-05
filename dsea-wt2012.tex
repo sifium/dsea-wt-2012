@@ -303,11 +303,54 @@ Betrachten wir nun den Wurf eines der k Eier aus Stockwerk x und die beiden mög
 \end{description}
 \[t_{15,2}=1+\min(\max(t_{1,1},t_{13,2}),\max(t_{2,1},t_{12,2},\hdots)\]
 
+\chapter{VL 5.12.}
+Informationstheoretische untere Schranke für vergleichsbasierte Sortierverfahren\\
+\[a[0],a[1],a[2]\]
+Entscheidungsbaum:
+\begin{figure}[H]\center
+\includegraphics[trim= .9cm 20cm .9cm .9cm,clip,width=\columnwidth]{figures/vergleichsbaum.pdf}
+\caption{Vergleichsbaum}
+\end{figure}
+\[a_i\ne a_j \mbox{ für }0\le i\ne j<n\]
+\#Blätter im entscheidungsbaum\[\ge n!\]
+Sei $t_{\max} $ die maximale Tiefe im Entscheidungsbaum
+\[\Rightarrow 2^{t_{\max}}\ge n! \Rightarrow t_{\max} \ge \log_2n!\]
+\[\ln n! = \ln (1\,\]
 
+\begin{figure}[H]\center
+\includegraphics[width=\columnwidth]{figures/m1.jpg}
+\end{figure}
 
+Sei $t'$ die mittlere Tiefe der Blätter im Entscheidungsbaum
+\begin{figure}[H]\center
+\includegraphics[trim= .9cm 15cm 14.7cm 10cm,clip,width=.4\columnwidth]{figures/vergleichsbaum.pdf}
+\caption{Entscheidungsbaum}
+\end{figure}
+\begin{align*}
+mt'(m)&=l(t'(l)+1)+r(t'(r)+1)\\
+t'(m)&=\frac{l}{m}t'(l)+\frac{r}{m}+1 \mbox{ wird minimal für } l=r=\frac{m}{2}\\
+t'(m)&\ge t'(\frac{m}{2})+1 \Rightarrow t'(m)\ge\log_2m\end{align*}
 
+\section{Hashing mit Verkettung}
+BILD\\
+Verwaltung einer unsortierten Menge.
+\begin{itemize}
+\item search
+\item insert
+\item delete
+\end{itemize}
+\[|U|>>m~n=\#\mbox{verwaltete Elemente}\]
+\[h:U\rightarrow\{0,1,\hdots,m-1\}\mbox{ Hashfunktion}\]
+Belegungsfaktor der Hashtabelle
+\[\alpha =\frac{n}{m}\]
+Idealisierte Annahme:\\
+Hashfunktion $h$ verteilt die n Elemente zufällig gleichverteilt auf die m Tabelleneinträge.
 
-
+$n_i$ sei die erwartete Anzahl von Elementen, die auf Tabelleneintrag $i$ gehasht werden.
+\[n_i=\alpha =\frac{n}{m}\Rightarrow \mbox{ Suchzeit }=\mathcal O(1+\alpha)\]
+unter der Vorraussetzung, dass sich die Hashfunktion in Konstanter Zeit auswerten lässt.\\
+Beispiel der Wahl einer Hashfunktion:
+\[h(k)=(ak+b)\mod m\]
 
 
 
