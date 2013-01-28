@@ -1,4 +1,4 @@
-\documentclass[a4paper,twoside,10pt]{report}
+\documentclass[a4paper,draft,twoside,10pt]{report}
 \usepackage{geometry}
 \usepackage[utf8x]{inputenc}
 \usepackage[ngerman]{babel}
@@ -303,6 +303,13 @@ Betrachten wir nun den Wurf eines der k Eier aus Stockwerk x und die beiden mög
 \end{description}
 \[t_{15,2}=1+\min(\max(t_{1,1},t_{13,2}),\max(t_{2,1},t_{12,2},\hdots)\]
 
+
+
+\chapter{VL 3.12.}
+
+
+
+
 \chapter{VL 5.12.}
 Informationstheoretische untere Schranke für vergleichsbasierte Sortierverfahren\\
 \[a[0],a[1],a[2]\]
@@ -353,29 +360,481 @@ Beispiel der Wahl einer Hashfunktion:
 \[h(k)=(ak+b)\mod m\]
 
 
+\chapter{VL 10.12.}
+Idealisierte Annahme:
+Die n Elemente werden unabhängig und gleichverteilt auf die m Tabellenplätze abgebildet.
+\[h: U\rightarrow \{0, \hdots, m-1\}\]
+
+\textbf{Frage:} Wie hoch ist die mittlere Suchzeit für ein zufälliges Element aus der Tabelle?
+Sei $k_1,k_2,\hdots , k_n$ die Einfügereihenfolge der $n$ Schlüssel in die Tabelle?
+\begin{align*}
+\mathcal X 
+\end{align*}
+
+%\begin{figure}[H]\center
+%\includegraphics[width=\columnwidth]{figures/m2.jpg}
+%\capture{Nachtrag}
+%\end{figure}
+
+\section{Universelles Hashing}
+$\mathcal H$ Klasse von Hashfunktionen
+z.B. $h(k) = (ak+b) \mod p \mod m $
+$1\le a < p, 0\le b < p \, m<p \mbox{Primzahl}$
+
+\textbf{Def.} $\mathcal H$ heißt universell
+\[\Leftrightarrow \forall k \ne l \in U : | \{h\in \mathcal H | h (k) = k(l) \} |\le \frac{|\mathcal H|}{m}\]
+
+Sei $n_i$ die erwartete Länge der Kollisionsliste bei Feldeintrag $i$.
+\[y_k = \mbox{Länge der Kollisionsliste für den Schlüssel $k$}\]
+
+\chapter{VL 12.12.}
+\begin{align*}E(\sum_{i=0}^{n-1}n^2_i)=E(\sum_{i=0}^{n-1}(n_i+2(\begin{array}{c}n_i\\2\end{array})))=E(\sum_{i=0}^{n-1}n_i)+2E(\sum_{i=0}^{n-1}(\begin{array}{c}n_i\\2\end{array}))\end{align*}
+Dies entspricht der Zahl der Kollidierendden Paare in dar Primärtabelle.
+\[=n+2E(\sum_{k\ne l\in T} \mathcal X_{kl})=n+2\sum_{k\ne l\in T} E(\mathcal X_{kl})\]
+\[=n+2(\begin{array}{c}n\\2\end{array})\frac{1}{n}=n+\frac{2n(n-1)}{2n}\le 2n\]
+Weitere Klasse von univversellen Hashfunktionen
+\[E(a\mathcal X+ b\mathcal Y) =aE(\mathcal X)+bE(\mathcal Y)\]
+\[k=(k_1,k_2,\hdots, k_d) ,0\le k_i <p\]\[a=(a_1, \hdots,a_d)\]
+\[h_a(k)=\sum_{i=1}^d a_ik_i \mod p\]
+ Tabellengröße $m=p$ Primzahl.
+\[\mathcal H=\{h_a|a=(a_1,\hdots ,a_d), 1\le a_i<p\}\]
+\[\mathcal H =(p-1)^d\]
+Wähle $k\ne l$
+\[h_a(k)=\sum_{i=1}^d a_i k_i \mod p =\sum_{i=1}^d a_i l_i \mod p =h_a(l)\]
+
+FEHLEND
+
+Für jede der $(p-1)^{d-1}$ Möglichkeiten die $a_i$'s auf der rechten Seite zu wählen gibt es genau ein $a_j$, das zu einer Kollission zwischen den Schlüsseln $k$ und $l$ führt.
+
+
+\section{Graphen}
+Ein Graph $G$ besteht in der Regel aus Vertices $V$ und Kanten (Edges) $E$.
+\[G=(V,E)\]
+\[E\subseteq V\times V\]
+$(u,v)\in E$ gerichtet\\
+$\{u,v\}$ ungerichtet\\
+DAG : directed acyclicgraph\\
+planare Graphen\\
+Eulersche Polyederformel
+\[|V|+|F|=|E|+2\]
+Würfel: $8+6=12+2$\\
+
+\subsection{Adjazenzmatrix $A$}
+\[A_{u,v} = \left\{\begin{array}{ll}1&\mbox{falls $(u,v)\in E$}\\0&\mbox{sonst}\end{array}\right.\]
+Speicherbedarf: $\mathcal O(|V|^2)$\\
+ 
+Adjazenzliste\\
+FIGURE\\
+
+\section{Tiefensuche}
+\textbf{engl.} Depth-First-Search
+\begin{figure}[H]
+\begin{verbatim}
+forall v in V
+   visited [v] =false;
+stack S;
+S.push(s); // s entspricht Startknoten
+while(!S.empty()) {
+   u=S.pop();
+   forall(u,v) in E
+      if(!visited[v]){
+         S.push(v);
+      }
+}
+visited[v]=true;
+\end{verbatim}
+\caption{Pseudocode Tiefensuche}
+\end{figure}
+
+\chapter{VL 17.12.}
+\section{Breitensuche}
+Fehlend
+\section{Kürzeste Wege Algorithmen.}
+Eigenschaften von Algorithmen , die mittels Kantenrelaxierungen kürzeste Wege bestimmen.
+
+Obere Schranke: $\forall v\in V : d[v] \ge S(s,v)$
+Beweis durch Induktion nach der Zahl der Kantenrelaxierungen.
+\begin{description}
+\item[IA] Nach initialisierung gilt die Induktions-Annahme.
+\item[IS] $relax(u,v)$
+\begin{description}
+\item[1.Fall] $d[v]$ wird nicht verändert, woraus die Richtigkeit der IA folgt.
+\item[2.Fall] ...
+\end{description}
+\end{description}
+
+Konvergenzeigenschaft:\\
+Sei $s \rightsquigarrow u\rightarrow v$ein Kürzester Weg von $s$ nach $V$ mit $d[u]=S(s,u)$, denn gilt nach dem Relaxieren der Kante $(u,v):d[v]=S(s,l)$
+\[d[v]\le d[u]+w(u,v)=S(s,u-+w(u,v)=S(s,v)\]
+
+Korrektheitsbeweis Bellman-Ford\\
+Betrachte einen kürzesten Weg $s=v_0\rightarrow v_1 \rightarrow \hdots \rightarrow v_k=v$
+Folgende Invariante gilt: Nach dem $i$-ten Schleifendurchlauf: $d[v_i=S(s,v_i)$
+Ind. Bew. 
+$s \rightsquigarrow v_i \rightarrow v_{i+1}$
+Im $(i+1)$-ten Schleifendurchlauf wird irgendwann auch die Kante $(v_i,v_{i+1})$ relaxiert.
+Konvergenzeigenschaft: $d[v_{i+1}]=S(s,v_{i+1})$
+
+Erkennung negativer Zyklen
+\begin{verbatim}
+forall (u,v) in E
+   if (d[v] > d[u] +w(u,v))
+      return negativer Zyklus erkannt
+return kein negativer Zyklus vorhanden
+\end{verbatim}
+Sei $c = (s=v_0\rightarrow v_1 \rightarrow \hdots \rightarrow v_k=v)$ ein negativer Zyklus $\sum_{i=1}^k w(v_{i-1}, v_i)<0$
+
+\chapter{VL 19.12.}
+\section{Dijkstra-Algorithmus}
+\[G=(V,E)\, w:E\rightarrow \mathbb R^+\]
+
+\begin{verbatim}
+init();
+PriorityQueue Q = V;
+S = \emptyset
+while(!Q.empty()){
+   u=Q.deletemin();
+   S = Sv{u}; 
+   relax(u,v){
+      if(d[v]>d[u]+w(u,v)){
+         d[v]=d[u]+w(u,v);
+         pred[v]=u;
+         Q.decreasekey(v);
+      }
+      forall (u,v) \in E
+         relax(u,v);
+   }
+\end{verbatim}
+\textbf{Laufzeit:}\\
+\[\mathcal O(|v|cost(deletemie)+|E|cost(decreasekey))\]
+\[\mathcal O((|v|+|E|)\log |v|)\]
+wenn PriorityQueue durch balancierten Suchbaum verwaltet wird.\\[.5em]
+alternativ $\mathcal O (|v|\log |v|+|E|)$ PQ mit Hilfe von Fibonacci-Heaps
+
+\subsection{Korrektheitsbeweis}
+BILD\\
+\begin{description}
+\item[Beh.]$\forall v \in V$ gilt nach Ablauf des Algorithmus $d[v]= S(s,v)$
+\item[Bew.] durch Widerspruch\\
+Annahme $\exists v:d[v]> S(s,v)$ (obere Schrankeneigenschaft)\\
+Sei $v$ der erste Knoten, für den dies gilt, zum Zeitpunkt, wenn er aus $Q$ entnommen wird.\\
+Sei $s \rightsquigarrow x\rightarrow y \rightsquigarrow v$ ein kürzester Weg von $s$ nach $v$.
+\[d[v]\le d[y]=S(s,y)\le S(s,v)<d[v]\]
+$\le $ gilt aufgrund der positiven Kantengewichte.\\[.5em]
+$d[x]=S(s,x)$ weil $x$ vor dem "falschen" Knoten $v$ betrachtet wird.\\[.5em]
+Konvergenzeigenschaft $d[y]=S(s,y)$ weil $x\rightarrow y$ relaxiert und $s \rightsquigarrow x\rightarrow y $ kürzester Pfad.\\[.5em]
+$d[v]\le d[y]$, $v$ wird vor $y$ aus der PQ entnommen.
+\end{description}
+
+
+\chapter{VL 07.01.}
+\chapter{VL 09.01.}
+
+
+\chapter{VL 14.01.}
+\begin{verbatim}
+FibNode{
+   Fibnode left, right, down, up;
+   int deg;
+   bool mark;
+   float key;
+}
+
+FibHeap{
+   Fibnode min;
+   ... decreaseked, deletemin,
+         consolidate, insert;
+}
+
+void decreasekey (Fibnode x, float newkey){
+   if(newhey>x.key error;
+   x.key=newkey;
+   if(x.up ==null){
+      if(x.key<minkey) min=x;
+      return;
+   }
+   FibNode y=x.up;
+   if(x.key >= y.key) return;
+      //löse x ab
+   do{ y=x.up;
+      remove x from y childlist;
+      y.degree--;
+      add x to rootlist;
+      x.up F null;
+      x.mark = false;
+      if (x.key <min.key) min = x;
+      x=y;
+   } while (x.mark== true);
+}
+
+void consolidate(){
+   int dmax =floor(log(phi,n));
+   Fibnode[] A=new FibNode(dmax+1);
+   for(int i=0;i<=dmax;i++){
+      FibNode x=v;
+      int d =x.deg;
+      while (A[d]!=Null){
+         FibNode y=A[d];
+         if(x.key>y.key)
+            swap(x,y);
+         remove y from rootlist;
+         add y to childlist of x; x.deg++;
+         d++;
+      }
+      A[d]=x;
+   }
+   for(int i=0;i<=dmax;i++)
+      if (A[i]!= Null){
+         add A[i] to new rootlist;
+         if (A[i].key<min.key) min =A[i];
+      }
+}
+\end{verbatim}
+
+\section{Minimal aufspannende Bäume}
+$G=(V,E)$ zusammenhängend, ungerichtet. 
+
+Mit einer Kostenfunktion $ w: E\rightarrow \mathbb R$
+
+Gesucht ist ein \textbf{Spannbaum} $T_{min} \subseteq E$ mit
+\[w(T_{min})=\sum _{(u,v)\in T_{min}} w(u,v) \mbox{minimal}\]
+\begin{verbatim}
+Greedy-Algo
+T= emptyset;
+while (T noch kein Spannbaum){
+   wähle eine sichere Kante (u,v) in E
+   T=T cup {(u,v)};
+}
+\end{verbatim}
+\subsection{Lemma}
+Sei $T_{min}$ ein minimaler Spannbaum für $G=(V,E)$
+bzgl. $w: E\rightarrow \mathbb R $ und $ T\subseteq T_{min} \subseteq E$ eine Teillösung.
+
+Sei $(S,V\/S) $ ein Schnitt von $G$ und die Kanten von $T$ respektieren diesen Schnitt $\nexists (u,v)\in T, u\in S, v\in V\/ S)$
+dann ist die Kante $(u,v)$ mit minimalem Gewicht, die den Schnitt kreuzt, eine sichere Kante für $T$.
+
+Somit $T' = T \cup \{(u,v)\}$ und $T' $ zu $T_{min}$ ergänzt werden kann.
+
+\subsection{Beweis}
+Sei $T_{min}$ ein minimal aufspannender Baum, der aus der Teillösung $T$ entstanden ist.
+
+\chapter{VL 16.01.}
+Sei $(u,v)\in E$ die Kante mit kleinstem Gewicht, die über den Schnitt führt.
+\begin{align}
+&T_{min}\\
+&T\\
+&T\cup T_{min}
+\end{align}
+Der gewählte Schnitt $(S,V\/S)$ \textbf{respektiert} die Teillösung $T$, d.h. keine Kante von $T$ läuft über diesen Schnit
+\[T' =T\cup \{(u,v)\}\]
+$T' $ kann zu einem minimalen Spannbaum $T'_{min} $ ausgebaut werden.
+\[w(T'_{min}= w(T_{min}\]
+Durch Einfügen von $(u,v)$ in $T_{min}$ entsteht ein Zyklus $C$.
+Da $u\in S$ und $v\in V\/S$ gibt es miedestens eine Kante von $C\/\{(u,v)\}$ die über den Schnitt führt: $w(x,y) \geq w(u,v)$
+\[T'_{min}=T_{min}\/ \{(x,y)\}\cup \{(u,v)\}\]
+$T'_{min}$ ist ebenfalls Spannbaum.
+\[w(T_{min})\leq w (T'_{min})Fw(T_{min})-w(x,y)+w(u,v)\leq W(T_{min})\] 
+\textbf{BILD}
+\begin{table}[H]
+\begin{tabular}{ccccccccc}
+$v$&1&2&3&$\hdots$&7&$\hdots$&12&13\\\hline
+$rep$&1&2&3&$\hdots$&1&$\hdots$&12&13\\
+$next$&7&-1&-1&$\hdots$&-1&$\hdots$&12&13\\
+\end{tabular}
+\end{table}
+$rep$ ist der Repräsentanten-Knoten zur Identifikation einer Komponente.
+
+Die Korrektheit folgt unmittelbar aus dem Cut-Lemma.
+
+\subsection{Laufzeit}
+Sortierphase 
+\[\mathcal O(|E|\log |V|)\]
+
+mit
+\[|E|\leq |V|^2 \,\,,\,\, \log|E|=\mathcal O (\log |V|)\]
+
+Baumphase
+\[|E| * find-Op\]
+\[|V| * union-Op\]
+
+\section{Bemerkungen zu den Kosten der Union-find-Operationen}
+Beim Kruskal-Algorithmus:
+\[cost(find)= \mathcal O(1) \mbox{, da nur 2 Feldzugriffe nötig}\]
+\[\sum^{|V|-1}_{i=1}cost(union_i)=\mathcal O(|V|\log |V|)\]
+Voraussetzung: Repräsentanten der jeweilskürzeren Liste werden umbenannt.
+
+Frage aus der Sicht eines Knotens:
+"Wie oft werde ich umbenannt?"
+
+Antwort: Nach jeder Umbenennung verdoppelt sich die Komponentengröße mindestens.
+\[ \mbox{nach }k\mbox{-Umbenennungen}\le 2^k \Rightarrow k\le \log_2 |V|\]
+Gesamtlaufzeit
+\[\mathcal O(|E|\log|V|+|E|+|V|\log|V|)=\mathcal O(|E|\log|V|)\]
+Geht es schneller?
+
+
+
+\chapter{VL 21.01.}
+\section{Prim-Algorithmus}
+
+BILD
+
+Distanzfeld $d$ verwaltet die minimale Entfernung des Knotens zu den Knoten $S$ der Teillösung $T$.
+
+\begin{verbatim}
+if(w(v,v_1)<d[v_1]){
+   d[v_1]=w(v,v_1);
+   pi[v_1]=v;
+}
+
+forall v\in V{
+   d[v]= \infty ;
+   pi[v]=-1;
+}
+d[s]=0;
+T=\emptyset ;
+PriorityQueue Q(V,d);
+while (!Q.empty(){
+   v=Q.deletemin();
+   if(v \neq s)
+      T=T \cup {(pi(v),v)};
+   forall (v' \in Adj(v) && v' \in Q)
+      if(w(v,v')<d[v]){
+         d[v']=w(v,v');
+         pi[v']=v;
+   }
+}
+\end{verbatim}
+Nach Ablauf des Prim-Algo. gilt:
+\[T_{min}=\{(\pi(v),v)|v\in V\/\{s\}\}\]
+Laufzeit:
+\[\mathcal O(|V|cost(deletemin)+|E|cost(decreasekey))\]
+\[= \mathcal O (|V|\log|V|+|E|)\]
+\section{Flussalgorithmen}
+\[G=(V,E)\,\,\,\mbox{gerichtet.}\]
+
+mit zwei ausgezeichneten Knoten $s$ und $t$.
+
+Gesucht ist ein maximaler Fluss
+\[f:E\rightarrow \mathbb R^{>0}\]
+sodass
+\[0\le f(u,v)\le c(u,v)\]
+Kapazitätsfunktion:
+\[c:E\rightarrow \mathbb R^{>0}\]
+Flusserhaltung:
+\[\sum_{u\in V}f(u,v) = \sum_{u\in V} f(v,u')\]
+für alle $v\in V\/\{s,t\}$\\
+$|f|=$ Wert des Flusses, der von $s$ nach $t$ transportiert werden kann.
+
+Nettofluss:
+\[|f|=\sum_{v\in V}f(s,v) -\sum_{v\in V} f(v,s) \]
+
+Ziel: Finde eine Belegung der Kanten mit Flusswerten $f$, so dass $|f|$ maximal und $f$ erfüllt Kapazitätsbedingung und Flusserhaltung.
+Es gilt:
+\[|f|=\sum_{v\in V} f(v,t) - \sum_{v\in V} f(t,v)\]
+
+\subsection{Restgraph}
+BILD!!!
+
+\textit{Idee:} Finde einen Fluss $f'$ im Restnetzwerk $G_f=(V,E_f)$ und verbessere den Ausgangsfluss $f$ im Originalgraph durch Addition von $f$ und $f':f\oplus f'$
 
 
 
 
+\chapter{VL 20.01.}
+Restnetzwerk
+\[G_f=(V,E_f)\]
+\[c_f(u,v)=\left\{\begin{array}{ll}
+c(u,v)-f(u,v)&\mbox{für } (u,v)\in E\\
+f(v,u)&\mbox{für } (v,u)\in E\\
+0&\mbox{sonst}
+\end{array}\right.\]
 
+\begin{description}
+\item[1. Idee] Suche einen Fluss verbessernden Pfad $p$ im Restnetzwerk $G_f$\\
+Bottleneck-Kante:\[c_f(p)=\min\{c_f(u,v) \mbox{für} (u,v)\in p\}\]
+\end{description}
 
+Sei $f$ ein Fluss im Originalgraphen $G$ und $f'$ im Restnetzwerk $G_f$, dann ist auch 
 
+$(f\oplus f')(u,v)=\left\{\begin{array}{ll}
+f(u,v)+f'(u,v)-f'(v,u)&\mbox{für } (u,v)\in E\\
+0&\mbox{sonst}
+\end{array}
+\right.$
+\begin{itemize}
+\item[$(1)$]\begin{align*}(f\oplus f')(u,v)&=f(u,v)+f'(u,v)-f'(v,u)\\ &\le f(u,v)+f'(u,v)-f(u,v)\\ &=f'(u,v)\ge 0\end{align*}
+\item[$(2)$]\begin{align*}(f\oplus f')(u,v)&=f(u,v)+f'(u,v)-f'(v,u)\\ &\le f(u,v)+f'(u,v)\\ &\le f(u,v)+c(u,v)-f(u,v)\\&=c(u,v)\end{align*}
+\item[$(3)$]\begin{align*}\sum_{v\in V}(f\oplus f')(u,v)&=\sum_{v\in V}\{f(u,v)+f'(u,v)-f'(v,u)\}\\
+&=\sum f(u,v)+\sum f'(u,v)-\sum f'(v,u)\\
+&=\sum f(v,u)+\sum f'(v,u) -\sum f'(u,v)\\
+&=\sum_{v\in V}(f\oplus f')(v,u)\end{align*}
+\end{itemize}
 
+\begin{align*}
+|(f\oplus f')|&= |f|+|f'|\\
+&=\sum (f\oplus f')(s,v)-\sum (f\oplus f')(v,s)\\
+&=\sum f(s,v)+f'(s,v)-f'(v,s)-\sum f(v,s)+f'(v,s)-f'(s,v)\\
+&=\sum f(s,v)-\sum f(v,s)+...?\\
+&=|f|+...
+\end{align*}
 
+\section{Schnitte}
+Sei $V=S\sqcup T$ mit $s\in S$ und $T\in T$ ein Schnitt durch $G$.
+\[c(S,T)= \sum_{u\in S}\sum_{v\in T}c(u,v)\]
 
+Definition:
+\[f(S,T)= \sum_{u\in S}\sum_{v\in T}f(u,v)- \sum_{u\in T}\sum_{v\in S}f(u,v)\]
+Es gilt:\[f(S,T)\le  \sum_{u\in S}\sum_{v\in T}f(u,v)\le  \sum_{u\in S}\sum_{v\in T}c(u,v)\le c(S,T)\]
 
+Lemma:
 
+Sei $f$ ein Fluss und $(S,T)$ ein beliebiger Schnitt, dann gilt:
+\[|f|\le c(S,T)\]
 
+\begin{align*}
+|f|&= \sum_v f(s,v)-\sum_v f(v,s)=^! f(S,T)\\
+&=\sum_v f(s,v)-\sum_v f(v,s) + \sum_{v\in V}\sum_{u\in S\/\{s\}}f(u,v)-\sum_{u\in S\/\{s\}} f(v,u)\\
+&=\sum_{v\in V}\sum_{u\in S}f(u,v)-\sum_{v\in V}\sum_{u\in S}f(v,u)\\
+&=.....
+\end{align*}
 
+\chapter{VL 28.01.}
 
+\section{Max-Flow-Min-Cut Theorem}
+Gegeben sei ein Fluss $f$ im Netzwerk $G=(V,E)$ von $s$ nach $t$.
 
+Folgende Aussagen sind äquivalent:
+\begin{enumerate}
+\item $f$ ist ein maximaler Fluss
+\item Es gibt keinen flussverbessernden Pfad im Restnetzwerk $G_f=(V,E_f)$
+\item Es gibt einen Schnitt $(S,T)$ mit $|f|=c(S,T)$
+\end{enumerate}
+\textbf{Beweis:} $(1)\Rightarrow (2)\Rightarrow(3)\Rightarrow(1)$
 
+Mit Kontraposition:\\
+$\neg (2)\Rightarrow \neg (1)$
 
+Sei $f'$ ein Fluss im $G_f$ entlang des existierenden flussverbessernden Pfades
+\[|(f\oplus f')|=|f|+|f'| > |f|\Rightarrow f \mbox{ nicht maximal}\]
 
+$(2)\Rightarrow (3)$
+Definiere $S=\{v\in V | \exists s \rightsquigarrow v \mbox{ in } G_f\},T=V\/S, t\notin S$ da kein flussverb. von $s$ nach $t$ in $G_f$ nach Vor.
 
+Sei $(u,v)$ mit $u\in S$ und $v\in T$, dann gilt: $f(u,v) =c(u,v)$
 
+\textbf{Annahme:} $f(u,v)<c(u,v)\Rightarrow (u,v) \in E_f$ mit $c_f(u,v)>0 \Rightarrow s\rightsquigarrow u\rightarrow v$ in $G_f$ Blitz $v\in T$
 
+Sei $(u,v)$ mit $u\in T$ und $v \in S$, dann gilt: $f(u,v)>0$
+$f(u,v)>0 \Rightarrow (v,u) \in E_f$ mit $c_f (v,u) =f(u,v)>0$
+$\Rightarrow S\rightsquigarrow v\rightarrow u$ in $G_f$ Blitz $u\in T$
 
+\subsection{Laufzeit FF-Algo}
+Ann. $c(u,v)\in \mathbb N \forall (u,v)\in E$
+\[C=\sum_{v\in V} c(s,v)\in \mathbb N \]
+Zahl der Iterationen $\leq C$
+
+Laufzeit $\mathcal O(C|E|)$
 
 
 
