@@ -836,6 +836,38 @@ Zahl der Iterationen $\leq C$
 
 Laufzeit $\mathcal O(C|E|)$
 
+\section{Edmund-Karp Algo}
+\textbf{Idee:} Verwende als flussverbessernde Pfade nur solche mit minimaler Kantenzahl.
+Sei $G_f=(V,E_f)$ das Restnetzwerk mit $c_f(u,v)>0 \forall (u,v)\in E_f$
+$S_f(s,v) =$ Zahl der Kanten auf einem Kürzesten Weg von $s$ nach $v$ im Restnetzwerk $G_f$.
+Sei $f'$ der Fluss, der aus $f$ durch eine Flussverbesserung entlang eines Kürzesten Weges in $G_f$ entstanden ist dann gilt: $\delta _{f'} (s,v) \geq \delta_f(s,v)$
+
+Layernetzwerk Bild
+
+Sei $(u,v)$ eine Bottleneck-Kante, die durch die Flussverbesserung saturiert wird.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
